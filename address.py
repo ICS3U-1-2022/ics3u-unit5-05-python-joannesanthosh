@@ -5,19 +5,20 @@
 # This program prints out your address using default function parameters
 
 
-# this function formats the address
+# This function formats address
 def format_address(
-    full_name
-    apartment_number = None
-    street_number
-    street_name
-    city
-    provice
-    postal_code
+    full_name,
+    street_number,
+    street_name,
+    city,
+    province,
+    postal_code,
+    apartment_number=None,
 ):
 
-    # format address
-    format = full_name + "\n"
+    # return proper address
+
+    formatted = full_name + "\n"
     formatted = formatted + str(street_number)
     if apartment_number != None:
         formatted = formatted + "-" + str(apartment_number)
@@ -28,22 +29,42 @@ def format_address(
 
     return formatted
 
+
 def main():
-    # gets a users name and prints out their formal name
-    middle_name = None
+    # main function
+    apartment_number = None
 
-    first_name = input("Enter your first name: ")
-    question = input("Do you have a middle name? (y/n): ")
-    if question.upper() == "Y" or question.upper() == "YES":
-        middle_name = input("Enter your middle name: ")
-    last_name = input("Enter your last name: ")
+    full_name = input("Enter your full name: ")
+    question = input("Do you live in an apartment? (y/n): ")
+    if question == "y":
+        apartment_number = input("Enter your apartment number: ")
+    street_number = input("Enter your street number: ")
+    street_name = input("Enter your street name and type (Main St, Express Pkwy...): ")
+    city = input("Enter your city: ")
+    province = input("Enter your province (as an abbreviation, ex: ON, BC...): ")
+    postal_code = input("Enter your postal code (A1B 2C3): ")
 
-    if middle_name != None:
-        name = full_name(first_name, last_name, middle_name)
-    else:
-        name = full_name(first_name, last_name)
+    try:
+        if apartment_number != None:
+            apartment_number = int(apartment_number)
+        street_number = int(street_number)
+        # calls function
+        Proper_address = format_address(
+            full_name,
+            street_number,
+            street_name,
+            city,
+            province,
+            postal_code,
+            apartment_number,
+        )
+        print("\n")
+        print(Proper_address.upper())
+    except ValueError:
+        print("\nInvalid Input.")
 
-    print(name)
+    print("\nDone.")
+
 
 if __name__ == "__main__":
     main()
